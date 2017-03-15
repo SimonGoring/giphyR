@@ -42,5 +42,9 @@ search <- function(q, limit = 25, offset = 0, rating = NULL, lang = NULL, sticke
     stop(paste0('giphy returned an error: ', meta$msg))
   }
 
-  return(giphy_list)
+  giphy_out <- list(giphy_list$data)
+  attr(giphy_out, 'meta') <- giphy_list$meta
+  attr(giphy_out, 'pagination') <- giphy_list$pagination
+
+  return(giphy_out)
 }
