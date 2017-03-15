@@ -20,9 +20,17 @@ plot_giphy <- function(image, n = 1, type = 'original', action = TRUE) {
   }
 
   if (type %in% 'downsized') {
-    image_out <- image$images$downsized$url[n]
+    if ('downsized' %in% names(image$images)) {
+      image_out <- image$images$downsized$url[n]
+    } else if ('fixed_height_downsampled_url' %in% names(image)) {
+      image_out <- image$fixed_height_downsampled_url
+    }
   } else if (type %in% 'original') {
-    image_out <- image$images$original$url[n]
+    if ('original' %in% names(image$images)) {
+      image_out <- image$images$original$url[n]
+    } else if ('image_url' %in% names(image)) {
+      image_out <- image$image_url
+    }
   }
 
   out_fig <- magick::image_read(image_out)
