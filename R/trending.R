@@ -34,7 +34,7 @@ trending <- function(limit = 25, rating = NULL, sticker = FALSE, api_key = 'dc6z
 
   }
 
-  giphy_response <- httr::content(httr::GET(base_uri, query = params), as = "text")
+  giphy_response <- httr::content(httr::GET(base_uri, query = params), as = "text", encoding = 'UTF-8')
   giphy_list <- jsonlite::fromJSON(giphy_response)
 
   if(giphy_list$meta$status %in% c(400, 401, 403)) {
