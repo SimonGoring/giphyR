@@ -28,7 +28,7 @@ search <- function(q, limit = 25, offset = 0, rating = NULL, lang = NULL, sticke
     base_uri <- 'http://api.giphy.com/v1/stickers/search'
     params$sticker <- NULL
 
-  } else if (params$sticker == TRUE) {
+  } else if (params$sticker == FALSE) {
 
     base_uri <- 'http://api.giphy.com/v1/gifs/search'
     params$sticker <- NULL
@@ -42,7 +42,7 @@ search <- function(q, limit = 25, offset = 0, rating = NULL, lang = NULL, sticke
     stop(paste0('giphy returned an error: ', meta$msg))
   }
 
-  giphy_out <- list(giphy_list$data)
+  giphy_out <- giphy_list$data
   attr(giphy_out, 'meta') <- giphy_list$meta
   attr(giphy_out, 'pagination') <- giphy_list$pagination
 
