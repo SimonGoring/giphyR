@@ -35,7 +35,7 @@ search <- function(q, limit = 25, offset = 0, rating = NULL, lang = NULL, sticke
 
   }
 
-  giphy_response <- httr::content(httr::GET(base_uri, query = params), as = "text")
+  giphy_response <- httr::content(httr::GET(base_uri, query = params), as = "text", encoding = 'UTF-8')
   giphy_list <- jsonlite::fromJSON(giphy_response)
 
   if(giphy_list$meta$status %in% c(400, 401, 403)) {
