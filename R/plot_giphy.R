@@ -15,6 +15,10 @@
 
 plot_giphy <- function(image, n = 1, type = 'original', action = TRUE) {
 
+  if(n > nrow(image)) {
+    stop('There are only ', nrow(image), ' indexed GIFs in the giphy object.')
+  }
+
   if (type %in% 'downsized') {
     image_out <- image$images$downsized$url[n]
   } else if (type %in% 'original') {
