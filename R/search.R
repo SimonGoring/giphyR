@@ -46,5 +46,7 @@ search <- function(q, limit = 25, offset = 0, rating = NULL, lang = NULL, sticke
   attr(giphy_out, 'meta') <- giphy_list$meta
   attr(giphy_out, 'pagination') <- giphy_list$pagination
 
+  class(giphy_out) <- c('giphy', 'data.frame')
+
   return(giphy_out)
 }
