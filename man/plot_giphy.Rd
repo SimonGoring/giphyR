@@ -9,15 +9,12 @@ plot_giphy(image, n = 1, type = "original", action = TRUE)
 \arguments{
 \item{n}{When the \code{giphy} contains multiple images, the index of the image requested.}
 
-\item{type}{GIF size, either \code{original} or \code{downscaled}.  Default is \code{original}.}
+\item{type}{GIF size, either \code{original} or \code{downsized}.  Default is \code{original}.}
 }
 \description{
 Returns a random GIF from Giphy, which may be limited using tags.
 }
 \details{
-
-}
-\examples{
 
 }
 \author{
