@@ -13,9 +13,16 @@
 #'
 #' @author Simon J. Goring \email{simon.j.goring@@gmail.com}
 #' @details
+#'     Search for a specific, or particular gif using the giphy API.  May return a large number of gifs, so it is possible to move through multiple searches using \code{limit} and \code{offset}.
+#'     Be aware that failure to use the \code{rating} tag may result in gifs that are not safe for work use.
+#'     The default API key used here is for testing purposes only.  More information on the use of the giphy API is available at \url{https://github.com/Giphy/GiphyAPI}
+#' @examples
+#' gif <- search('Simon Goring', rating = 'g')
+#' plot(gif)
 #'
-#' @example
-#'
+#' sticker <- search('Simon Goring', rating = 'g', sticker = TRUE)
+#' plot(sticker)
+#' @export
 
 search <- function(q, limit = 25, offset = 0, rating = NULL, lang = NULL, sticker = FALSE, api_key = 'dc6zaTOxFJmzC') {
 
