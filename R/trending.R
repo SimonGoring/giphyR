@@ -11,8 +11,19 @@
 #'
 #' @author Simon J. Goring \email{simon.j.goring@@gmail.com}
 #' @details
-#'
+#'     Finds gifs that are currently trending through giphy's services.
+#'     Be aware that failure to use the \code{rating} tag may result in gifs that are not safe for work use.
+#'     The default API key used here is for testing purposes only.  More information on the use of the giphy API is available at \url{https://github.com/Giphy/GiphyAPI}
+
 #' @example
+#' gif <- trending(rating = 'pg', limit = 10)
+#' plot(gif, n = 2)
+#'
+#' # Generate a smaller gif with transparent background using the sticker flag:
+#' gif <- trending(rating = 'pg', limit = 10, sticker = TRUE)
+#' plot(gif, n = 2)
+#'
+#' @export
 
 trending <- function(limit = 25, rating = NULL, sticker = FALSE, api_key = 'dc6zaTOxFJmzC') {
 
@@ -23,13 +34,13 @@ trending <- function(limit = 25, rating = NULL, sticker = FALSE, api_key = 'dc6z
   if (params$sticker == TRUE) {
 
     base_uri <- 'http://api.giphy.com/v1/stickers/trending'
-    params <- as.list(environment())
 
     params$sticker <- NULL
 
   } else if (params$sticker == FALSE) {
 
     base_uri <- 'http://api.giphy.com/v1/gifs/trending'
+
     params$sticker <- NULL
 
   }
