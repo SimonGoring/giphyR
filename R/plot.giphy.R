@@ -21,10 +21,10 @@
 #' @examples
 #'
 #' gifs <- trending('horses', rating = 'g')
-#' plot_giphy(gifs, n = 1)
+#' plot(gifs, n = 1)
 #'
 #' # Plot a smaller version of the same gif:
-#' plot_giphy(gifs, n = 2, type = 'downsized')
+#' plot(gifs, n = 2, type = 'downsized')
 #' @export
 
 plot.giphy <- function(x, n = 1, type = 'original', ...) {

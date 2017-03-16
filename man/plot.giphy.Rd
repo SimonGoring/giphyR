@@ -31,10 +31,10 @@ Plotting a giphy requires installation of the \code{imagemagick} program.  When 
 \examples{
 
 gifs <- trending('horses', rating = 'g')
-plot_giphy(gifs, n = 1)
+plot(gifs, n = 1)
 
 # Plot a smaller version of the same gif:
-plot_giphy(gifs, n = 2, type = 'downsized')
+plot(gifs, n = 2, type = 'downsized')
 }
 \author{
 Simon J. Goring \email{simon.j.goring@gmail.com}
