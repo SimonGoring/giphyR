@@ -35,7 +35,7 @@ random <- function(tag = NULL, rating = NULL, sticker = FALSE, api_key = 'dc6zaT
   giphy_list <- jsonlite::fromJSON(giphy_response)
 
   if(giphy_list$meta$status %in% c(400, 401, 403)) {
-    stop(paste0('giphy returned an error: ', meta$msg))
+    stop(paste0('giphy returned an error: ', giphy_list$meta$msg))
   }
 
   empty <- data.frame(url = NA,

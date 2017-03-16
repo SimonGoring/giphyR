@@ -33,7 +33,7 @@ gif_id <- function(id = NULL, api_key = 'dc6zaTOxFJmzC') {
   giphy_list <- jsonlite::fromJSON(giphy_response)
 
   if(giphy_list$meta$status == 403) {
-    stop(paste0('giphy returned an error: ', meta$msg))
+    stop(paste0('giphy returned an error: ', giphy_list$meta$msg))
   }
 
   giphy_out <- giphy_list$data

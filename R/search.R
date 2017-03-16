@@ -39,7 +39,7 @@ search <- function(q, limit = 25, offset = 0, rating = NULL, lang = NULL, sticke
   giphy_list <- jsonlite::fromJSON(giphy_response)
 
   if(giphy_list$meta$status %in% c(400, 401, 403)) {
-    stop(paste0('giphy returned an error: ', meta$msg))
+    stop(paste0('giphy returned an error: ', giphy_list$meta$msg))
   }
 
   giphy_out <- giphy_list$data

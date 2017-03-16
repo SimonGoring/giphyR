@@ -38,7 +38,7 @@ trending <- function(limit = 25, rating = NULL, sticker = FALSE, api_key = 'dc6z
   giphy_list <- jsonlite::fromJSON(giphy_response)
 
   if(giphy_list$meta$status %in% c(400, 401, 403)) {
-    stop(paste0('giphy returned an error: ', meta$msg))
+    stop(paste0('giphy returned an error: ', giphy_list$meta$msg))
   }
 
   giphy_out <- giphy_list$data

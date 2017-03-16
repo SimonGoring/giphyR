@@ -40,10 +40,11 @@ translate <- function(s, rating = NULL, lang = NULL, sticker = FALSE, api_key = 
 
   }
 
-  giphy_list <- base_uri %>% GET(query = params) %>% httr::content(as = "text", encoding = 'UTF-8') %>% jsonlite::fromJSON()
+  giphy_response <- httr::content(httr::GET(base_uri, query = params), as = "text", encoding = 'UTF-8')
+  giphy_list <- jsonlite::fromJSON(giphy_response)
 
   if(giphy_list$meta$status %in% c(400, 401, 403)) {
-    stop(paste0('giphy returned an error: ', meta$msg))
+    stop(paste0('giphy returned an error: ', giphy_list$meta$msg))
   }
 
   giphy_out <- giphy_list$data
