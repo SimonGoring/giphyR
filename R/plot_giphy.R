@@ -15,7 +15,7 @@
 
 plot_giphy <- function(image, n = 1, type = 'original', action = TRUE) {
 
-  if(n > nrow(image)) {
+  if(n > nrow(image) & !is.list(image$images)) {
     stop('There are only ', nrow(image), ' indexed GIFs in the giphy object.')
   }
 
