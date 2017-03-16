@@ -1,22 +1,13 @@
-#' @title Print a giphy object
-#' @description Print method for giphyR
-#' @param image a \code{giphy} object.
-#'
-#' @author Simon J. Goring \email{simon.j.goring@@gmail.com}
-#' @details
-#'
-#' @example
-#'
 #' @export
-print.giphy <- function(image) {
+print.giphy <- function(x, ...) {
 
-  out_table <- data.frame(slug   = image$slug,
-                          id     = image$id,
-                          width  = image$images$original$width,
-                          height = image$images$original$height,
-                          frames = image$images$original$frames)
+  out_table <- data.frame(slug   = x$slug,
+                          id     = x$id,
+                          width  = x$images$original$width,
+                          height = x$images$original$height,
+                          frames = x$images$original$frames)
 
-  cat(paste0('\nA giphy object with ', nrow(image$images), ' gif images:\n'))
+  cat(paste0('\nA giphy object with ', nrow(x$images), ' gif images:\n'))
   print(out_table, row.names = FALSE, right = FALSE)
 
 }
