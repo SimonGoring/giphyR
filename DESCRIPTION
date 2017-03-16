@@ -6,8 +6,12 @@ Author: Simon Goring
 Maintainer: Simon Goring <simon.j.goring@gmail.com>
 Description: The package downloads information about GIF images from Giphy
     (http://giphy.com) and plots them using the magick package for R.  Plotting
-    requires the installation of ImageMagick.
-License: MIT
+    requires the installation of ImageMagick (https://www.imagemagick.org/script/download.php).
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
+Imports:
+    magick,
+    jsonlite,
+    httr
