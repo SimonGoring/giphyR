@@ -45,6 +45,8 @@ trending <- function(limit = 25, rating = NULL, sticker = FALSE, api_key = 'dc6z
   attr(giphy_out, 'meta') <- giphy_list$meta
   attr(giphy_out, 'pagination') <- giphy_list$pagination
 
+  class(giphy_out) <- c('giphy', 'data.frame')
+
   return(giphy_out)
 
 }
