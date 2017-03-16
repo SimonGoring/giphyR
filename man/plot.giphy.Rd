@@ -16,9 +16,16 @@
 \item{...}{arguments to be passed to \code{magick::image_read}.}
 }
 \description{
-Returns a random GIF from Giphy, which may be limited using tags.
+Plots the giphy into your view-port.
 }
 \details{
+Plotting a giphy requires installation of the \code{imagemagick} program.  When a \code{giphy}
+    object is returned from one of the calls, the user may plot the first object returned (default \code{n = 1})
+    or, may select one of the images returned.  The limit is generally 25, but more or fewer may be returned
+    depending on the user parameters set.
+    A user may plot the original image, or, possibly, a downscaled version of the GIF, if such an object exists.
+    It is possible to pass other parameters to the function, but they are unused.
+
 
 }
 \author{

@@ -26,7 +26,10 @@ translate can be found in the Giphy Slack, Hipchat, Wire, or
 Dasher integrations. Use a plus or url encode for phrases.
 }
 \details{
-
+Tanslates a word or phrase to a GIF using the \code{giphy} API.
+    Be aware that failure to use the \code{rating} tag may result in gifs that are not safe for work use.
+    The default API key used here is for testing purposes only.  More information on the use of the giphy API is available at \url{https://github.com/Giphy/GiphyAPI}
+    Language support is documented in the giphy API documentation for Language Support: \url{https://github.com/Giphy/GiphyAPI#language-support}.
 }
 \author{
 Simon J. Goring \email{simon.j.goring@gmail.com}

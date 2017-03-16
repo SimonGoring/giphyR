@@ -10,8 +10,14 @@
 #'
 #' @author Simon J. Goring \email{simon.j.goring@@gmail.com}
 #' @details
+#'     Pulls a random GIF from the \code{giphy} API.  This may be limited through the use of tags.
+#'     Be aware that failure to use the \code{rating} tag may result in gifs that are not safe for work use.
+#'     The default API key used here is for testing purposes only.  More information on the use of the giphy API is available at \url{https://github.com/Giphy/GiphyAPI}
 #'
 #' @example
+#' gif <- random('landlord', rating = 'g')
+#' plot(gif)
+#' @export
 
 random <- function(tag = NULL, rating = NULL, sticker = FALSE, api_key = 'dc6zaTOxFJmzC') {
 
