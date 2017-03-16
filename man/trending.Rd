@@ -24,6 +24,15 @@ Finds gifs that are currently trending through giphy's services.
     Be aware that failure to use the \code{rating} tag may result in gifs that are not safe for work use.
     The default API key used here is for testing purposes only.  More information on the use of the giphy API is available at \url{https://github.com/Giphy/GiphyAPI}
 }
+\examples{
+gif <- trending(rating = 'pg', limit = 10)
+plot(gif, n = 2)
+
+# Generate a smaller gif with transparent background using the sticker flag:
+gif <- trending(rating = 'pg', limit = 10, sticker = TRUE)
+plot(gif, n = 2)
+
+}
 \author{
 Simon J. Goring \email{simon.j.goring@gmail.com}
 }

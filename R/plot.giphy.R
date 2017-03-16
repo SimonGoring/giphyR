@@ -18,7 +18,7 @@
 #' @author Simon J. Goring \email{simon.j.goring@@gmail.com}
 #' @details
 #'
-#' @example
+#' @examples
 #'
 #' gifs <- trending('horses', rating = 'g')
 #' plot_giphy(gifs, n = 1)

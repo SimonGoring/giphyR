@@ -1,5 +1,5 @@
 #' @title Giphy search
-#' @description Search all Giphy GIFs for a word or phrase. Punctuation will be stripped and ignored.  The search can be limited to \
+#' @description Search all Giphy GIFs for a word or phrase. Punctuation will be stripped and ignored.
 #' @param q Search query term or phrase
 #' @param limit - The number of results to return, up to 100. The default is \code{limit=25}.
 #' @param offset - An offset, to manage limited returns.  The default is \code{offset=0}, for subsequent searches, can increment \code{offset} by the size of \code{limit}

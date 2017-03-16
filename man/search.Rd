@@ -22,6 +22,9 @@ search(q, limit = 25, offset = 0, rating = NULL, lang = NULL,
 
 \item{api_key}{- Giphy provides a default \code{api_key} value for public beta testing: \code{"dc6zaTOxFJmzC"}.  This is the default value.}
 }
+\description{
+Search all Giphy GIFs for a word or phrase. Punctuation will be stripped and ignored.
+}
 \details{
 Search for a specific, or particular gif using the giphy API.  May return a large number of gifs, so it is possible to move through multiple searches using \code{limit} and \code{offset}.
     Be aware that failure to use the \code{rating} tag may result in gifs that are not safe for work use.
