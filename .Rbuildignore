@@ -1,0 +1,6 @@
+^packrat/
+^\.Rprofile$
+^.*\.Rproj$
+^\.Rproj\.user$
+^code_of_conduct\.md$
+^giphy\.Rproj$
