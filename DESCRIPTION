@@ -15,3 +15,6 @@ Imports:
     magick,
     jsonlite,
     httr
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

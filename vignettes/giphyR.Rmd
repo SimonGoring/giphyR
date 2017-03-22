@@ -1,0 +1,87 @@
+---
+title: "Animated GIFs for your R Reports"
+author: "Simon J. Goring"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Animated GIFs for your R Reports}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+> "This annual report is great, but it would be better with an animated image, taken from Shrek, where the donkey says something hilarious."
+- Anonymous CEO of a large international banking conglomerate
+
+The increasing use of automated reporting using tools within scientific and administrative workflows, such as RMarkdown and Jupyter, has led users to require a greater range of tools to make their reports stand out. Significant steps within the R ecosystem have added custom table formatting using `kable`, (OTHER PACKAGES) and SOMETHING ELSE.  However, while animated GIFs have long been part of the common currency on Internet message boards and messaging applications such as Slack, for technical reasons animated GIFs have been absent from the peer reviewed literature and technical reports, even as journals move to online-only formats (*e.g.*, [OpenQuaternary]() and [Data Science Journal]()).  The development of the `giphyR` package allows researchers to place significant findings into context by linking them to simple animated images which serve to emphasize key points or distract from inconvenient results.
+
+The `giphyR` package binds to published endpoints of the [`giphy`](http://giphy.com) Application Programming Interface (API) to connect to a library of animated images from Giphy, providing users with the ability to search, access and download images that can be used to adorn reports.  The `giphyR` package requires the use of the `magick` R package, which itself is dependent on the software [ImageMagick]().
+
+# Installing ImageMagick
+
+# Using `giphyr`
+
+## A `giphy` object
+
+`giphyR` commands that return data objects from Giphy return an object of class `giphy`.  The object contains a number of parameters to support various image sizes, static and animated versions, and other image elements that provide image metadata.  
+
+### `print`ing a `giphy`
+
+### `plot`ting a `giphy`
+
+## Finding `random` GIFs
+
+## Finding `trending` GIFs
+
+## `search`ing for GIFs
+
+## `translate` a word or phrase
+
+
+
+Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+
+- Never uses retina figures
+- Has a smaller default figure size
+- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+
+## Vignette Info
+
+Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+
+## Styles
+
+The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+
+    output: 
+      rmarkdown::html_vignette:
+        css: mystyles.css
+
+## Figures
+
+The figure sizes have been customised so that you can easily put two images side-by-side. 
+
+```{r, fig.show='hold'}
+plot(1:10)
+plot(10:1)
+```
+
+You can enable figure captions by `fig_caption: yes` in YAML:
+
+    output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+
+Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+
+## More Examples
+
+You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+> "He who gives up [code] safety for [code] speed deserves neither."
+([via](https://twitter.com/hadleywickham/status/504368538874703872))
