@@ -10,7 +10,8 @@
 #' @param sticker Should a GIF be returned or an animated sticker (with transparent background)?  Default to \code{FALSE}.
 #' @param api_key - Giphy provides a default \code{api_key} value for public beta testing: \code{"dc6zaTOxFJmzC"}.  This is the default value.
 #' @importFrom jsonlite fromJSON
-#' @importFrom httr content GET
+#' @importFrom httr content
+#' @import dplyr
 #'
 #' @author Simon J. Goring \email{simon.j.goring@@gmail.com}
 #' @details
@@ -41,8 +42,9 @@ translate <- function(s, rating = NULL, lang = NULL, sticker = FALSE, api_key = 
 
   }
 
-  giphy_response <- httr::content(httr::GET(base_uri, query = params), as = "text", encoding = 'UTF-8')
-  giphy_list <- jsonlite::fromJSON(giphy_response)
+  giphy_list <- httr::GET(base_uri, query = params) %>%
+    httr::content(as = "text", encoding = 'UTF-8') %>%
+    jsonlite::fromJSON()
 
   if(giphy_list$meta$status %in% c(400, 401, 403)) {
     stop(paste0('giphy returned an error: ', giphy_list$meta$msg))

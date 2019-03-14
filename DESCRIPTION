@@ -14,7 +14,8 @@ RoxygenNote: 6.0.1
 Imports:
     magick,
     jsonlite,
-    httr
+    httr,
+    dplyr
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr

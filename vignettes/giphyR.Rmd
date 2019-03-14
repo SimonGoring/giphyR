@@ -2,86 +2,130 @@
 title: "Animated GIFs for your R Reports"
 author: "Simon J. Goring"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: html_vignette
 vignette: >
   %\VignetteIndexEntry{Animated GIFs for your R Reports}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r, echo = FALSE, message=FALSE, warning = FALSE}
+library(giphyR, quietly = TRUE)
+test <- giphyR::search('giphy package', rating = 'g')
+```
+
 > "This annual report is great, but it would be better with an animated image, taken from Shrek, where the donkey says something hilarious."
 - Anonymous CEO of a large international banking conglomerate
 
-The increasing use of automated reporting using tools within scientific and administrative workflows, such as RMarkdown and Jupyter, has led users to require a greater range of tools to make their reports stand out. Significant steps within the R ecosystem have added custom table formatting using `kable`, (OTHER PACKAGES) and SOMETHING ELSE.  However, while animated GIFs have long been part of the common currency on Internet message boards and messaging applications such as Slack, for technical reasons animated GIFs have been absent from the peer reviewed literature and technical reports, even as journals move to online-only formats (*e.g.*, [OpenQuaternary]() and [Data Science Journal]()).  The development of the `giphyR` package allows researchers to place significant findings into context by linking them to simple animated images which serve to emphasize key points or distract from inconvenient results.
+The increasing use of automated reporting using tools within scientific and administrative workflows, such as RMarkdown and Jupyter, has led users to require a greater range of tools to make their reports stand out. Significant steps within the R ecosystem have added custom table formatting using `kable`, (OTHER PACKAGES) and SOMETHING ELSE.  However, while animated GIFs have long been part of the common currency on Internet message boards and messaging applications such as Slack, for technical reasons animated GIFs have been absent from the peer reviewed literature and technical reports, even as journals move to online-only formats (*e.g.*, [Open Quaternary](http://www.openquaternary.com/) and [Data Science Journal](http://datascience.codata.org/)).  The development of the `giphyR` package allows researchers to place significant findings into context by linking them to simple animated images which serve to emphasize key points or distract from inconvenient results.
 
 The `giphyR` package binds to published endpoints of the [`giphy`](http://giphy.com) Application Programming Interface (API) to connect to a library of animated images from Giphy, providing users with the ability to search, access and download images that can be used to adorn reports.  The `giphyR` package requires the use of the `magick` R package, which itself is dependent on the software [ImageMagick]().
 
 # Installing ImageMagick
 
-# Using `giphyr`
+Instructions for installing ImageMagick and the `magick` package are clearly described in the [`magick` package vignette](https://cran.r-project.org/web/packages/magick/vignettes/intro.html).
+
+# Using `giphyR`
 
 ## A `giphy` object
 
-`giphyR` commands that return data objects from Giphy return an object of class `giphy`.  The object contains a number of parameters to support various image sizes, static and animated versions, and other image elements that provide image metadata.  
+`giphyR` commands that return data objects from Giphy return an object of class `giphy`.  The object contains a number of parameters to support various image sizes, static and animated versions, and other image elements that provide image metadata.  The object includes a large number of elements, some filled, some NA, depending on the Giphy response.
+
+```{r echo = FALSE, results = 'as-is'}
+names(test)
+```
+
+The majority of these columns are either `character` or `integer` classes, however, `images` and `user` are both `data.frame`s that contain more information about both the images and the users who uploaded the images.  The `images` element is itself a `data.frame` of `data.frame`s.  There is a unique `data.frame` for each image representation within the `giphy` object.  In general these include the `original` and a `downsized` table:
+
+```{r, echo = FALSE, results='as-is'}
+knitr::kable(head(test$images$original))
+```
+
+A `giphy` 
 
 ### `print`ing a `giphy`
+
+
 
 ### `plot`ting a `giphy`
 
 ## Finding `random` GIFs
 
+Giphy's `random` endpoint provides a single random GIF that can be restriced to GIFs with a certain suitability rating, for example, `'g'` and `'pg'`.  Leaving the `rating` parameter unfilled results in an unrated GIF, and may cause issues for the user if the function is used in a workplace environment.
+
+The `giphyR` `random()` function takes parameters `tag`, which can help constrain search results, `rating`, as discussed above, `sticker`, which differentiates between larger sized GIFs without transparent backgrounds (`sticker = FALSE`) and smaller GIFs with transparent backgrounds (`sticker=TRUE`).  This function is generally not recommended for users intent on auto-generating documents.  As noted above, the results may include offensive or off-putting content.  Stories have been told about a user who used `random()` as part of a government document prepared for a G7 meeting and was promply fired by the Deputy Minister for Finance as a result of a GIF showing Scrooge McDuck swimming through a pile of money with the caption "Higher taxes feed the beast!".
+
+The `api_key` is used as part of Giphy's terms of use.  Testing applications can use the default API key (the default for this package), but if a user intends to use this package as part of a production tool (for example, a Shiny app), then they should apply for their own API key.
+
+### Example of the `random()` function:
+
+> "If a picture is worth a thousand words, then an animated GIF is worth a thousand lols."
+- Sir John A. MacDonald, first Prime Minister of Canada
+
+A user is generating techinical documentation for a new trans-continental passenger jet.  To illustrate safety instructions they would like to illustrate calm and orderly de-planing in the event of a water landing.  Following a block of text explaining the procedure they would like to embed a figure that would represent the textual description.  Within the RMarkdown document, the user would encode:
+
+```r
+
+/```{r, result = 'hide'}
+deplaning <- giphyR::random(tag='safe deplaning', rating = 'g')
+plot(deplaning)
+/```
+
+```
+
+```{r randomPlot, fig.cap = 'Deplaning procedures.'}
+
+deplaning <- giphyR::random(tag='safe deplaning', rating = 'g')
+plot(deplaning)
+
+```
+
+
 ## Finding `trending` GIFs
+
+Within social media it is important for companies to appear current and, in the parlance of the younger generation, 'hip with the jive'.  Given this, it may be useful to include GIFs that are currently popular so that companies, consultants, or scientists working on projects that will have a public audience can seem 'hip to the jive'.
+
+The `trending()` function can return up to 100 trending results from the Giphy web service.  These results cannot be limited by `tag`, but can be restricted by rating (including `rating = 'r'`, the restricted rating, which is the most permissive).  As these GIFs will be embedded within documents for public consumption in most cases we recommed using a more restricted rating (as opposed to the `'r'` rating).  In the following example, a researcher is looking for a recently popular GIF, and wants to return the 10^th^ result:
+
+
+```r
+
+/```{r, result = 'hide'}
+hip_gif <- giphyR::trending(rating = 'g')
+plot(hip_gif, n = 10)
+/```
+
+```
+
+```{r trendingPlot, fig.cap = 'The trendiest GIF.'}
+
+hip_gif <- giphyR::trending(rating = 'g')
+plot(hip_gif, n = 10)
+
+```
 
 ## `search`ing for GIFs
 
+When a researcher is preparing a document such as a grant proposal or a thesis document, the choice of an appropriate GIF may be critically important.  It would be unfortunate if one's thesis committee were to open up the second chapter and find a GIF that, while it may be G rated, is inappropriate for the subject of the thesis.  For this puspose one may use the `search()` function to find a more appropriate GIF.  If the thesis subject was, perhaps, the American chestnut (*Castanea dentata*), a tree once common in the northeastern United States, but currently in decline as the result of the Chestnut blight, a pathogenic fungus.  To really highlight the importance of the work, the researcher chooses to include an animated GIF, but wishes to ensure the image is appropriate for the thesis:
+
+
+```r
+
+/```{r, result = 'hide'}
+chestnut_gif <- giphyR::search("chestnut tree", rating = "g")
+plot(chestnut_gif, n = 10)
+/```
+
+```
+
+```{r searchPlot, fig.cap = 'The trendiest GIF.', fig.show='animate'}
+
+chestnut_gif <- giphyR::search("chestnut tree", rating = "g")
+plot(chestnut_gif, n = 1)
+
+```
+
+
 ## `translate` a word or phrase
 
-
-
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
-
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
-
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+Giphy 

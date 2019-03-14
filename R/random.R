@@ -7,6 +7,7 @@
 #'
 #' @importFrom jsonlite fromJSON
 #' @importFrom httr content GET
+#' @import dplyr
 #'
 #' @author Simon J. Goring \email{simon.j.goring@@gmail.com}
 #' @details
@@ -37,8 +38,9 @@ random <- function(tag = NULL, rating = NULL, sticker = FALSE, api_key = 'dc6zaT
 
   }
 
-  giphy_response <- httr::content(httr::GET(base_uri, query = params), as = "text", encoding = 'UTF-8')
-  giphy_list <- jsonlite::fromJSON(giphy_response)
+  giphy_list <- httr::GET(base_uri, query = params) %>%
+    httr::content(as = "text", encoding = 'UTF-8') %>%
+    jsonlite::fromJSON()
 
   if(giphy_list$meta$status %in% c(400, 401, 403)) {
     stop(paste0('giphy returned an error: ', giphy_list$meta$msg))

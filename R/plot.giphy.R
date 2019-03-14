@@ -61,6 +61,6 @@ plot.giphy <- function(x, n = 1, type = 'original', ...) {
 
   out_fig <- magick::image_read(image_out)
 
-  return(out_fig)
+  invisible(print(out_fig))
 
 }
